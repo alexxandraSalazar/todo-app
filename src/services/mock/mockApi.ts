@@ -1,8 +1,9 @@
 import { v4 as uuidv4 } from 'uuid';
 import type { ApiResponse, QueryParams, Entity, User } from '../../types';
+import { getEnvVariables } from '../../lib/env'; 
 
 // Leemos la variable de entorno o usamos 400 por defecto
-const DELAY_MS = Number(import.meta.env.VITE_MOCK_DELAY) || 400;
+const DELAY_MS = getEnvVariables().VITE_MOCK_DELAY;
 
 /**
  * Simulates network latency to mimic real-world API delays.
