@@ -45,7 +45,7 @@ export const LoginPage: React.FC = observer(() => {
         });
     };
 
-    return (
+return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
             <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
                 <div className="text-center mb-8">
@@ -54,25 +54,42 @@ export const LoginPage: React.FC = observer(() => {
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
-                    <Input
-                        name="email"
-                        label="Correo Electrónico"
-                        type="email"
-                        value={form.email}
-                        onChange={handleChange}
-                        required
-                        disabled={isLoading}
-                    />
+                    
+                    <div className="space-y-2">
+                        <label 
+                            htmlFor="email" 
+                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        >
+                            Correo Electrónico
+                        </label>
+                        <Input
+                            id="email"
+                            name="email"
+                            type="email"
+                            value={form.email}
+                            onChange={handleChange}
+                            required
+                            disabled={isLoading}
+                        />
+                    </div>
 
-                    <Input
-                        name="password"
-                        label="Contraseña"
-                        type="password"
-                        value={form.password}
-                        onChange={handleChange}
-                        required
-                        disabled={isLoading}
-                    />
+                    <div className="space-y-2">
+                        <label 
+                            htmlFor="password" 
+                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        >
+                            Contraseña
+                        </label>
+                        <Input
+                            id="password"
+                            name="password"
+                            type="password"
+                            value={form.password}
+                            onChange={handleChange}
+                            required
+                            disabled={isLoading}
+                        />
+                    </div>
 
                     <Button type="submit" className="w-full" isLoading={isLoading}>
                         Ingresar
