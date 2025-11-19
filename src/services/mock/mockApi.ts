@@ -1,7 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
-import type { ApiResponse, QueryParams, Entity } from '../../types';
+import type { ApiResponse, QueryParams, Entity, User } from '../../types';
 
-const DELAY_MS = 400;
+// Leemos la variable de entorno o usamos 400 por defecto
+const DELAY_MS = Number(import.meta.env.VITE_MOCK_DELAY) || 400;
 
 /**
  * Simulates network latency to mimic real-world API delays.
@@ -15,7 +16,12 @@ const wait = (ms: number): Promise<void> => new Promise((resolve) => setTimeout(
  * @template T - The entity type extending the base Entity interface.
  */
 class LocalDB<T extends Entity> {
-    constructor(private key: string) { }
+    // CORRECCIÓN: Declaración explícita para evitar error TS1294
+    private key: string;
+
+    constructor(key: string) { 
+        this.key = key;
+    }
 
     /**
      * Retrieves all records from the simulated storage.
@@ -58,11 +64,11 @@ export const mockApi = {
      * @returns {Promise<ApiResponse<User>>} Authenticated user details and token.
      * @throws {Error} If credentials do not match 'demo@gmail.com' / '123456'.
      */
-    login: async (email: string, password?: string): Promise<ApiResponse<import('../../types').User>> => {
+    login: async (email: string, password?: string): Promise<ApiResponse<User>> => {
         await wait(DELAY_MS);
 
         if (email === 'demo@gmail.com' && password === '123456') {
-            const user: import('../../types').User = {
+            const user: User = {
                 id: 'u-1',
                 name: 'Usuario Demo',
                 email,
