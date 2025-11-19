@@ -65,6 +65,8 @@ class AuthStore {
                     this.error = "Error desconocido al iniciar sesión";
                 }
             });
+            throw err; 
+            
         } finally {
             runInAction(() => this.isLoading = false);
         }
